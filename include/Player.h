@@ -17,6 +17,10 @@ class Player
 
     // Custom Constructor
     Player(std::string playerName, int inventorySize = 5);
+
+    // Custom Destructor
+    ~Player();
+
     void SetPlayerName(std::string playerName);
     void AddItem(Item newItem);
     void DisplayInventory();

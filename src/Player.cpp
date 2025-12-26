@@ -14,8 +14,15 @@ Player::Player(std::string playerName, int inventorySize)
 {
     this->playerName = playerName;
     this->inventorySize = inventorySize - 1;
-    inventory = new Item[inventorySize];
+    inventory = new Item[this->inventorySize];
     currentIndex = 0;
+}
+
+// Custom Destructor
+Player::~Player()
+{
+    delete inventory;
+    inventory = nullptr;
 }
 
 void Player::SetPlayerName(std::string playerName)
