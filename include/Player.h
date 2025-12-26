@@ -1,6 +1,4 @@
 #pragma once
-#include <iostream>
-#include <string>
 #include "Item.h"
 
 class Player
@@ -23,5 +21,6 @@ class Player
 
     void SetPlayerName(std::string playerName);
     void AddItem(Item newItem);
+    json InventoryToJson();
     void DisplayInventory();
 };

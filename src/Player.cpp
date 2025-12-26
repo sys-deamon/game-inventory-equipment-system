@@ -21,7 +21,7 @@ Player::Player(std::string playerName, int inventorySize)
 // Custom Destructor
 Player::~Player()
 {
-    delete inventory;
+    delete[] inventory;
     inventory = nullptr;
 }
 
@@ -42,19 +42,20 @@ void Player::AddItem(Item newItem)
     currentIndex++;
 }
 
-void Player::DisplayInventory()
+json Player::InventoryToJson()
 {
-    std::cout << "[\n";
+    json inventoryJson = json::array();
 
     for (int i = 0; i < currentIndex; i++)
     {
-        inventory[i].DisplayInfo(1);
-
-        if (i < currentIndex - 1)
-            std::cout << ",";
-
-        std::cout << "\n";
+        inventoryJson.push_back(inventory[i].ToJson());
     }
 
-    std::cout << "]\n";
+    return inventoryJson;
+}
+
+void Player::DisplayInventory()
+{
+    json inventoryJson = InventoryToJson();
+    std::cout << inventoryJson.dump(2) << std::endl;
 }

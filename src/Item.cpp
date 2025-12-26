@@ -24,20 +24,6 @@ Item::Item(std::string itemName, int itemDamage, int itemCondition, int itemProt
     this->isUpgradable = isUpgradable;
 }
 
-void Item::DisplayInfo(int indent)
-{
-    std::string pad = Indent(indent);
-
-    std::cout << pad << "{\n";
-    std::cout << pad << Indent(1) << "\"name\": \"" << itemName << "\",\n";
-    std::cout << pad << Indent(1) << "\"damage\": " << itemDamage << ",\n";
-    std::cout << pad << Indent(1) << "\"condition\": " << itemCondition << ",\n";
-    std::cout << pad << Indent(1) << "\"protection\": " << itemProtection << ",\n";
-    std::cout << pad << Indent(1) << "\"upgradable\": " << (isUpgradable ? "true" : "false") << "\n";
-    std::cout << pad << "}";
-}
-
-
 void Item::SetItemName(std::string itemName)
 {
     this->itemName = itemName;
@@ -61,4 +47,16 @@ void Item::SetItemProtection(int protection)
 void Item::SetUpgradeStatus(bool status)
 {
     isUpgradable = status;
+}
+
+json Item::ToJson()
+{
+    return
+    {
+        {"ItemName", itemName},
+        {"ItemDamage (1-100)", itemDamage},
+        {"ItemProtection", itemProtection},
+        {"ItemCondition", itemCondition},
+        {"upgradable", isUpgradable}
+    };
 }
